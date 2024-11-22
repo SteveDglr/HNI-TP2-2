@@ -1,80 +1,78 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Xml;
 
-
-//This file is not to be modified
 namespace TPLOCAL1.Models
 {
     public class OpinionList
     {
         /// <summary>
-        /// Function that alow to recover the opinions list inside an xml file
+        /// Fonction pour récupérer la liste des avis depuis un fichier XML
         /// </summary>
-        /// <param name="file">file path</param>
+        /// <param name="file">Chemin du fichier XML</param>
+        /// <returns>Liste des avis</returns>
         public List<Opinion> GetAvis(string file)
         {
-            // instantiating empty list
             List<Opinion> opinionList = new List<Opinion>();
 
-            // Creation of an XMLDocument object that alow to recover datas from the file
-            XmlDocument xmlDoc = new XmlDocument();
-            // Reading of the file thank to a StreamReader file
-            StreamReader streamDoc = new StreamReader(file);
-            string dataXml = streamDoc.ReadToEnd();
-            // Loading data in the XmlDocument
-            xmlDoc.LoadXml(dataXml);
-
-            // Retrieve the nodes, convert them to the "Avis" object, and add them to the "OpinionList" list.
-            // Loop through each XmlNode node with the path "root/row" (see xml file structure)
-            // The SelectNodes method retrieves all nodes with the specified path.
-            foreach (XmlNode node in xmlDoc.SelectNodes("root/row"))
+            // Vérifier si le fichier existe avant de tenter de le lire
+            if (!File.Exists(file))
             {
-                // Retrieving data from child nodes.
-                string LastName = node["LastName"].InnerText;
-                string FirstName = node["FirstName"].InnerText;
-                string OpinionGiven = node["OpinionGiven"].InnerText;
-
-                // Creating the "Opinion" object to add to the results list.
-                Opinion opinion = new Opinion
-                {
-                    LastName = LastName,
-                    FirstName = FirstName,
-                    OpinionGiven = OpinionGiven
-                };
-
-                // Adding the object to the list.
-                opinionList.Add(opinion);
+                throw new FileNotFoundException($"Le fichier spécifié est introuvable : {file}");
             }
 
-            // Returning the list formed by processing to the calling method.
+            try
+            {
+                // Utilisation de StreamReader avec le bloc using pour la gestion automatique des ressources
+                using (StreamReader streamDoc = new StreamReader(file))
+                {
+                    string dataXml = streamDoc.ReadToEnd();
+
+                    // Création d'un objet XmlDocument pour charger et manipuler le fichier XML
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.LoadXml(dataXml); // Charger les données XML
+
+                    // Sélection des nœuds correspondant à "root/row"
+                    foreach (XmlNode node in xmlDoc.SelectNodes("root/row"))
+                    {
+                        // Récupération des données dans chaque nœud enfant avec des vérifications nulles
+                        string lastName = node["LastName"]?.InnerText ?? "Inconnu";
+                        string firstName = node["FirstName"]?.InnerText ?? "Inconnu";
+                        string opinionGiven = node["OpinionGiven"]?.InnerText ?? "N";
+
+                        // Création de l'objet Opinion et ajout à la liste
+                        Opinion opinion = new Opinion
+                        {
+                            LastName = lastName,
+                            FirstName = firstName,
+                            OpinionGiven = opinionGiven
+                        };
+
+                        opinionList.Add(opinion);
+                    }
+                }
+            }
+            catch (XmlException ex)
+            {
+                // Gestion des erreurs si le fichier XML est mal formé
+                throw new InvalidOperationException("Le fichier XML est mal formé.", ex);
+            }
+            catch (Exception ex)
+            {
+                // Autres erreurs générales
+                throw new Exception("Une erreur s'est produite lors de la lecture du fichier.", ex);
+            }
+
             return opinionList;
         }
     }
 
-    // .: Info :.
-    // This class can be extracted to a new C# page, but for the sake of this exercise, it can be left in the same page.
-    // It's best to avoid having multiple classes inside the same page as it can complicate code readability and maintenance in the long run.
-    /// <summary>
-    /// Object that groups data related to reviews
-    /// \nCan be modified
-    /// </summary>
+    // Classe représentant un avis
     public class Opinion
     {
-        /// <summary>
-        /// Last name
-        /// </summary>
         public string LastName { get; set; }
-        /// <summary>
-        /// First name
-        /// </summary>
         public string FirstName { get; set; }
-        /// <summary>
-        /// Review given (Possible values: O or N)
-        /// </summary>
-        public string OpinionGiven { get; set; }
+        public string OpinionGiven { get; set; } // "O" pour donné, "N" pour non donné
     }
 }

@@ -1,0 +1,41 @@
+﻿@model List<TPLOCAL1.Models.Opinion>
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+    ViewData["Title"] = "Liste des avis";
+    ViewData["CurrentPage"] = "OpinionList";
+}
+
+<link rel="stylesheet" href="~/resources/Index.css" />
+<body>
+    
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Avis donné</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var opinion in Model)
+            {
+                    <tr>
+                        <td>@opinion.LastName</td>
+                        <td>@opinion.FirstName</td>
+                        <td class="@(opinion.OpinionGiven == "O" ? "green" : "red")">
+                        @if (opinion.OpinionGiven == "O")
+                        {
+                                    <span>Oui</span>
+                        }
+                        else
+                        {
+                                    <span>Non</span>
+                        }
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+</body>

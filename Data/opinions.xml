@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Opinions>
+  <Opinion>
+    <LastName>Flagada</LastName>
+    <FirstName>Michel</FirstName>
+    <OpinionGiven>N</OpinionGiven>
+  </Opinion>
+  <Opinion>
+    <LastName>Petterson</LastName>
+    <FirstName>Romu</FirstName>
+    <OpinionGiven>N</OpinionGiven>
+  </Opinion>
+  <Opinion>
+    <LastName>Pomme</LastName>
+    <FirstName>Francis</FirstName>
+    <OpinionGiven>O</OpinionGiven>
+  </Opinion>
+  <Opinion>
+    <LastName>Portman</LastName>
+    <FirstName>Nathalie</FirstName>
+    <OpinionGiven>O</OpinionGiven>
+  </Opinion>
+  <Opinion>
+    <LastName>Bernadette</LastName>
+    <FirstName>Micheline</FirstName>
+    <OpinionGiven>O</OpinionGiven>
+  </Opinion>
+  <Opinion>
+    <LastName>Cobol</LastName>
+    <FirstName>Dotnet</FirstName>
+    <OpinionGiven>N</OpinionGiven>
+  </Opinion>
+  
+</Opinions>

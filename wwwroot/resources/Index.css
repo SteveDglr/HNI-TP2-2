@@ -1,0 +1,94 @@
+﻿.image {
+    width: 150px;
+    height: 150px;
+}
+header {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    margin: 20px 0;
+    padding: 0 20px;
+    position : relative;
+}
+
+
+h1 {
+    text-align: center; 
+    flex-grow: 2; 
+    margin: 0; 
+    font-size: 24px; 
+}
+
+.image, h1 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+Nav {
+    width: 150px;
+    border: 2px solid #8c014c;
+    background-color: #8c014c;
+    color: white;
+    float: left;
+    margin-left : 10px;
+}
+
+li {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+a {
+    color: chocolate;
+}
+
+section {
+    margin-left: 170px;
+}
+
+table {
+    border-collapse;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+tr {
+    border-collapse;
+    border-style: solid;
+}
+
+th {
+    text-align: center;
+    border:none
+}
+
+td {
+    border-collapse;
+    border-style: solid;
+}
+.table-container {
+    display: flex;
+    flex-direction: column; /* Organise les tableaux en colonne */
+    gap: 20px; /* Espacement entre les tableaux */
+    align-items: center; /* Centre les tableaux si nécessaire */
+}
+
+p1 {
+    margin-left: 50px;
+}
+
+.green {
+    background-color: green;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.red {
+    background-color: red;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}

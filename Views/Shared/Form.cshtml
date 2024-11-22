@@ -1,0 +1,129 @@
+﻿@model TPLOCAL1.Models.FormModel
+@Html.ValidationSummary(false, "")
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+    ViewData["Title"] = "Formulaire TP HN avis";
+    ViewData["CurrentPage"] = "Form";
+}
+<script>
+    // Désactiver la validation côté client
+    $.validator.unobtrusive.parse = function () {};
+</script>
+
+
+
+<body>
+    
+    <section>
+        <form method="post" action="@Url.Action("ValidationFormulaire", "Home")">
+
+
+
+            <table>
+                <tr>
+                    <th colspan="2" class="title-center">Informations personnelles</th>
+                </tr>
+                <tr>
+                    <td>Nom</td>
+                    <td>
+                        <input type="text" name="Nom" value="@Model.Nom" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Prénom </td>
+                    <td>
+                        <input type="text" name="Prenom" value="@Model.Prenom" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Sexe </td>
+                    <td>
+                        <select name="sexe" required>
+                            <option value="@(Model.Sexe == "Sélectionner un sexe" ? "selected": "")">Sélectionner un sexe</option>
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Adresse </td>
+                    <td>
+                        <input type="text" name="Adresse" value="@Model.Adresse" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Code Postal </td>
+                    <td>
+                        <input type="text" name="CodePostal" value="@Model.CodePostal" pattern="^\d{5}$" required title="Merci de rentrer un code postal à 5 chiffres">
+                    </td>
+                </tr>
+                <tr>
+                    <td> Ville </td>
+                    <td>
+                        <input type="text" name="Ville" value="@Model.Ville" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Adresse Mail </td>
+                    <td>
+                        <input type="email" name="Email" value="@Model.Email">
+
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th colspan="2" class="title-center">
+                        Informations formation suivie
+                    </th>
+                </tr>
+                <tr>
+                    <td> Date début formation </td>
+                    <td>
+                        <input type="date" max="2021-01-01" name="DebForm" value="@Model.DebForm" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Formations suivies </td>
+                    <td>
+                        <select name="Form" required>
+                            <option value="@(Model?.Form =="Sélectionner une formation" ? "selected" : "")">Sélectionner une formation</option>
+                            <option value="Cobol">Cobol</option>
+                            <option value="Objet">Objet</option>
+                            <option value="Les deux">Les deux</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th colspan="2" class="title-center">
+                        Avis sur la formation
+                    </th>
+                </tr>
+                <tr>
+                    <td> Formation Cobol </td>
+                    <td>
+                        <input type="text" id="Cobol" name="Cobol" value="@Model.Cobol" >
+                    </td>
+                </tr>
+                <tr>
+                    <td> Formation C# </td>
+                    <td>
+                        <input type="text" id="Dotnet" name="Dotnet" value="@Model.Dotnet" >
+                    </td>
+                </tr>
+            </table>
+        
+            <button type="submit" class="btn btn-primary">Valider</button>
+
+        </form>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </section>
+
+
+
+</body>

@@ -1,0 +1,24 @@
+﻿<header>
+    <img src="~/resources/GroupeHN.png" class="image" alt="GroupeHN" />
+    <h1>@ViewData["Title"]</h1>
+    <link rel="stylesheet" href="~/resources/Index.css" />
+</header>
+<nav>
+    <ul>
+        @if (ViewData["CurrentPage"]?.ToString() == "Home")
+        {
+            <li><a href="/Home/Index/Form">Remplir le formulaire</a></li>
+            <li><a href="/Home/Index/OpinionList">Liste des avis</a></li>
+        }
+        else if (ViewData["CurrentPage"]?.ToString() == "Form")
+        {
+            <li><a href="/Home">Accueil</a></li>
+            <li><a href="/Home/Index/OpinionList">Liste des avis</a></li>
+        }
+        else if (ViewData["CurrentPage"]?.ToString() == "OpinionList")
+        {
+            <li><a href="/Home">Accueil</a></li>
+            <li><a href="/Home/Index/Form">Remplir le formulaire</a></li>
+        }
+    </ul>
+</nav>
